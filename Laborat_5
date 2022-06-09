@@ -1,0 +1,89 @@
+import java.util.Scanner;
+
+public class Laba5 {
+    public static void main(String[] args) {
+        for (int i=0 ; i<10;i++){
+      //   System.out.println(i+" " +minusOneMultivleTimes(i));
+         }
+        Scanner numScanner = new Scanner(System.in);
+         int matrixSize = numScanner.nextInt();
+         int[][] array = new int[matrixSize][matrixSize];
+         numScanner = new Scanner(System.in);
+        for (int i = 0; i < matrixSize; i++) {
+        String Stroka[] = numScanner.nextLine().split(" ");
+        for(int j = 0; j< matrixSize; j++) {
+         array[i][j] = Integer.parseInt(Stroka[j]);
+         }
+         }
+         System.out.println(opredeliteln(array));
+        /*matrixPrint(array);
+        //System.out.println("0 column");
+           matrixDecrease(array, 0);
+         //     System.out.println("1 column");
+                   matrixDecrease(array, 1);
+              //          System.out.println("2 column");
+                            matrixDecrease(array, 2);
+               //                   System.out.println("3 column");
+                                        matrixDecrease(array, 3);
+        //System.out.println("to " + opredelitel2(array));*/
+
+    }
+    public static int opredelitel2(int[][] matrix) {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+
+    }
+        public static int opredeliteln(int[][] matrix) {
+        if(matrix.length == 2){
+            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        }else {
+            int chastSumm = 0;
+            for(int i=0; i<matrix.length; i++){
+                int kofficient = minusOneMultivleTimes(i+2);
+                int[][] obrezMatrix = matrixDecrease(matrix, i);
+                int opredelitel = opredeliteln(obrezMatrix);
+              //  System.out.println("*****************");
+               // System.out.println("---" + i + "---");
+                matrixPrint(obrezMatrix);
+               // System.out.println(kofficient);
+                int deltasumm=kofficient * matrix[0][i] *  opredelitel;
+              //  System.out.println("deltasumm = " + kofficient + " * " + matrix[0][i] + " * " + opredelitel);
+                //System.out.println(deltasumm);
+                chastSumm = chastSumm + deltasumm;
+                //System.out.println("Chastnaya summa: " + chastSumm);
+            }             return chastSumm;
+        }
+    }      public static int minusOneMultivleTimes(int times) {
+        int result = -1;
+        if (times==0){
+            return 1;
+        }
+        if(times %2 == 0){
+            result = 1;
+        }else {
+            result = -1;
+        }
+        return result;
+    }
+    public static  int [][]matrixDecrease(int[][] matrix, int column) {
+        int[][] result = new int[matrix.length-1][matrix.length-1];
+        for (int i = 1; i < matrix.length; i++) {
+            int CurrentColumn=0;
+            for (int j = 0; j < matrix.length; j++) {
+                if(j==column)continue;
+                result[i-1][CurrentColumn] = matrix[i][j];
+                CurrentColumn++;
+               //  System.out.print("["+i+","+CurrentColumn+"]="+matrix[i][j]+ " ");
+                }
+            //System.out.println();
+        }         return result;
+    }
+    public static void matrixPrint(int[][] matrix){
+        for(int i = 0; i< matrix.length;i++){
+            for(int j =0; j< matrix.length; j++){
+                matrix[i][j] = matrix[i][j];
+                //System.out.print(matrix[i][j] + " ");
+            }
+            //System.out.println();
+        }
+    }
+}
