@@ -1,0 +1,33 @@
+public class Laba1 {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            int numbStrok = scanner.nextInt();
+            int numbElemnt = scanner.nextInt();
+            Scanner nabor = new Scanner(System.in);
+            String NaborVMassiv = nabor.nextLine();
+            String element[] = NaborVMassiv.split(" ");
+            int min = 1000;
+            String[][] matrix = new String[numbStrok][numbElemnt];
+            if (numbStrok > 1) {
+                for (int e = 0; e < element.length / (numbElemnt + 1); e++) {
+                    for (int i = 0; i < numbStrok; i++) {
+                        for (int y = 0; y < numbElemnt; y++) {
+                            matrix[i][y] = element[i * numbElemnt + y];
+                            System.out.print(matrix[i][y] + " ");
+                        }
+                        System.out.println();
+                    }
+                }
+                if (numbStrok > 1) {
+                    for (int m = 0; m < matrix.length; m++) {
+                        min = Math.min(Integer.parseInt(matrix[m][m]), min);
+                    }                 System.out.println(min);
+                }
+            } else {
+                String[] massOne = NaborVMassiv.split(" ");
+                for (int i = 0; i < massOne.length-1; i++) {
+                    System.out.print(massOne[i] + " ");
+                }
+            }
+        }
+}
